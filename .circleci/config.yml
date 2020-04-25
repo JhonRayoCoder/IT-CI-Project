@@ -60,5 +60,5 @@ jobs:
            - approval-job
             filters:
               branches:
+                only: master
                 only: master 
-          
