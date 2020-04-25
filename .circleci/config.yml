@@ -37,26 +37,27 @@ jobs:
   workflows: 
     build-and-test:
        jobs: 
-         - test: 
+      - test: 
          filters: 
-         branches: 
-         only: master 
-         - development-deploy:
+           branches: 
+             only: master 
+      - development-deploy:
              requires:
                  -test 
                   filters:
-                  branches: 
-                  only: master 
-       - approval-job:
+                    branches: 
+                      only: master 
+      - approval-job:
        type: approval
        requires: 
           - development-deploy
            filters:
-           branches: 
-           only: master 
-      - production-deploy:
+             branches: 
+               only: master 
+     - production-deploy:
          requires: 
            - approval-job
-            filters:
            branches:
            only: master
+              branches:
+                only: master
