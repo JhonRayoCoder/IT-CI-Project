@@ -19,11 +19,9 @@ jobs:
            -"9e:3c:6b:62:fc:60:5c:71:65:c3:7e:3b:8b:1a:8c:48"
         - run:
             command:
-              ssh -i ubuntu@c2-18-234-219-63.us-east-2.compute.amazonaws.com "bash deploy.sh"
- 
+              ssh -i ubuntu@c2-18-234-219-63.us-east-2.compute.amazonaws.com "bash deploy.sh" 
  approval-job:
-    
-    production-deploy:
+        production-deploy:
       machine:
         enabled: true
     steps:  
@@ -33,7 +31,6 @@ jobs:
       - run:
           command:
             ssh ubuntu@ec2-3-90-218-59.compute-1.amazonaws.com "bash deploy.sh"
-
   workflows: 
     build-and-test:
        jobs: 
@@ -59,5 +56,4 @@ jobs:
            - approval-job
             filters:
               branches:
-                only: master 
-          
+                only: master         
