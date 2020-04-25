@@ -35,11 +35,5 @@ jobs:
 workflows:
     build-and-test:
       jobs:
-        - development-deploy:
-        - approval-job:
-          type: approval
-          requires:
-            - development-deploy
-        - production-deploy:
-          requires:
-            - approval-job
+        - development-deploy
+        - production-deploy
