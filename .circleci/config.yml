@@ -23,6 +23,4 @@ jobs:
 workflows:
     build-and-test:
       jobs:
-        - development-deploy:
-          requires:
-            - test
+        - development-deploy
