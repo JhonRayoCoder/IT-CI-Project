@@ -38,17 +38,24 @@ jobs:
     build-and-test:
        jobs: 
          - test: 
+         filters:
          branches: 
          only: master 
          - development-deploy:
              requires:
-                 -test 
+                 -test
+                 filters:
        - approval-job:
        type: approval
        requires: 
           - development-deploy
       - production-deploy:
          requires: 
+         filters:
            - approval-job
+           filters:
            branches: 
+
            only: master 
+
+         
