@@ -20,6 +20,7 @@ jobs:
       - run: 
           command: |
             ssh ubuntu@18.234.219.63 "bash deploy.sh"
+  approval-job:
 
   production-deploy:
     machine:
@@ -35,4 +36,10 @@ workflows:
     build-and-test:
       jobs:
         - development-deploy
-        - production-deploy
+        - approval-job:
+            type: approval
+            requires:
+              - development-deploy
+        - production-deploy:
+            requires:
+              - approval-job
