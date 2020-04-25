@@ -20,7 +20,8 @@ jobs:
         - run:
             command:
               ssh -i ubuntu@c2-18-234-219-63.us-east-2.compute.amazonaws.com "bash deploy.sh"
-  approval-job:
+ 
+ approval-job:
     
     production-deploy:
       machine:
@@ -37,17 +38,26 @@ jobs:
     build-and-test:
        jobs: 
          - test: 
+         filters: 
          branches: 
          only: master 
          - development-deploy:
              requires:
                  -test 
+                  filters:
+                  branches: 
+                  only: master 
        - approval-job:
        type: approval
        requires: 
           - development-deploy
+           filters:
+           branches: 
+           only: master 
       - production-deploy:
          requires: 
            - approval-job
-           branches: 
+            filters:
+           branches:
            only: master 
+          
