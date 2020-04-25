@@ -12,7 +12,7 @@ function App() {
         </h2>
         <p className='Text'> Jhon Rayo </p>
         <p className='Text'> Juan Pablo </p>
-        <p className='Text'> Carlos Parra </p
+        <p className='Text'> Carlos Parra </p>
       </header>
     </div>
   );
