@@ -14,9 +14,9 @@ jobs:
     machine:
       enabled: true
       steps:
-        -add_ssh_keys:
-        fingerprints:
-         -"9e:3c:6b:62:fc:60:5c:71:65:c3:7e:3b:8b:1a:8c:48"
+        - add_ssh_keys:
+          fingerprints:
+            -"9e:3c:6b:62:fc:60:5c:71:65:c3:7e:3b:8b:1a:8c:48"
         - run: 
           command: |
             ssh ubuntu@18.234.219.63 "bash deploy.sh"
