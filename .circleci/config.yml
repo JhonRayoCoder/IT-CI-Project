@@ -1,9 +1,5 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
-
 version: 2.1
-  Experimental: 
-     pipelines: true
-    orbs:
+  orbs:
   node: circleci/node@1.1.6
 jobs:
  test:
@@ -23,7 +19,7 @@ jobs:
            -"9e:3c:6b:62:fc:60:5c:71:65:c3:7e:3b:8b:1a:8c:48"
         - run:
             command:
-              ssh -i ubuntu@c2-18-234-219-63.us-east-2.compute.amazonaws.com "bash deploy.sh"
+              ssh -i ubuntu@18.234.219.63 "bash deploy.sh"
  
  approval-job:
     
@@ -36,31 +32,31 @@ jobs:
              - "9e:3c:6b:62:fc:60:5c:71:65:c3:7e:3b:8b:1a:8c:48"
       - run:
           command:
-            ssh ubuntu@ec2-3-90-218-59.compute-1.amazonaws.com "bash deploy.sh"
+            ssh ubuntu@3.90.218.59 "bash deploy.sh"
 
   workflows: 
     build-and-test:
        jobs: 
-         - test: 
+      - test: 
          filters: 
-         branches: 
-         only: master 
-         - development-deploy:
+           branches: 
+             only: master 
+      - development-deploy:
              requires:
                  -test 
                   filters:
-                  branches: 
-                  only: master 
-       - approval-job:
+                    branches: 
+                      only: master 
+      - approval-job:
        type: approval
        requires: 
           - development-deploy
            filters:
-           branches: 
-           only: master 
-      - production-deploy:
+             branches: 
+               only: master 
+     - production-deploy:
          requires: 
            - approval-job
             filters:
-           branches:
-           only: master
+              branches:
+                only: master 
