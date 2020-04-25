@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
-  test:
+  build-and-test:
     executor:
       name: node/default
     steps:
@@ -21,12 +21,8 @@ jobs:
           command: |
             ssh ubuntu@18.234.219.63 "bash deploy.sh"
 workflows:
-    test:
+    build-and-test:
       jobs:
-        - test:
-            filters:
-              branches:
-                only: master
         - development-deploy:
           requires:
             - test
